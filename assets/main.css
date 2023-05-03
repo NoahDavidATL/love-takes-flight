@@ -495,12 +495,20 @@ h1.large {
     width: 107%;
 }
 
+.img-round.smaller .dashed-border {
+    padding: 76px;
+}
+
 .img {
     position: relative;
 }
 
 .img img {
     max-width: 60%;
+}
+
+.img.memory img {
+    max-width: 45%;
 }
 
 .story-row {
@@ -826,6 +834,10 @@ blockquote {
         max-width: 45%;
     }
 
+    .img.memory img {
+        max-width: 45%;
+    }
+
     img.typo {
         max-width: 65%;
     }
@@ -915,6 +927,11 @@ blockquote {
     .img img {
         max-width: 70%;
     }
+
+    .img.memory img {
+        max-width: 50%;
+    }
+
 
     img.typo {
         max-width: 50%;
@@ -1008,6 +1025,10 @@ blockquote {
 
     .img img {
         max-width: 45%;
+    }
+
+    .img.memory img {
+        max-width: 50% !important;
     }
 
     .friend .img img {
@@ -1109,6 +1130,10 @@ blockquote {
     }
 
     .img img {
+        max-width: 50%;
+    }
+
+    .img.memory img {
         max-width: 50%;
     }
 
