@@ -25,6 +25,6 @@
         a(".background-img").eq(g).css("background", 'url("' + h + '")'), a(".background-img").eq(g).children("img").hide(), a(".background-img").eq(g).css("background-position", "initial")
     }
     a(".countdown").countdown("2023/12/16 18:00:00", function (b) {
-        a(this).html(b.strftime("%D days %H hours %M minutes"))
+        a(this).html(b.strftime("%-D days %-H hours %-M minutes"))
     }), a(".venobox").venobox({titleattr: "data-title", numeratio: !0})
 }(jQuery);
