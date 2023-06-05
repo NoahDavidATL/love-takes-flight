@@ -667,6 +667,10 @@ h1.large {
     top: 60%;
 }
 
+.circle-dashed.middle.middle {
+    top: 5%;
+}
+
 img.gift-reg {
     max-width: 30%;
     opacity: .4;
@@ -843,7 +847,7 @@ blockquote {
     }
 
     img.gift-reg {
-        max-width: 40%;
+        max-width: 30%;
     }
 
     .circle-dashed.timeline {
@@ -1258,7 +1262,7 @@ blockquote {
     }
 
     img.gift-reg {
-        max-width: 40%;
+        max-width: 50%;
     }
 
     .block-date-hero li {
