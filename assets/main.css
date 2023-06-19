@@ -317,6 +317,14 @@ section.hero .inner-hero {
     position: relative;
 }
 
+.scroll.mobile.black {
+    color: #000;
+}
+
+.scroll.mobile.white {
+    color: #FFF;
+}
+
 .header.switched-header .main-nav li a {
     color: #353031;
 }
