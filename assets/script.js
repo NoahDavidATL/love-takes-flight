@@ -27,4 +27,12 @@
     a(".countdown").countdown("2023/12/16 18:00:00", function (b) {
         a(this).html(b.strftime("%-D days %-H hours %-M minutes"))
     }), a(".venobox").venobox({titleattr: "data-title", numeratio: !0})
+    a(document).ready(function () {
+        a(".answer").hide(); // hides the answer initially
+        a(".question li").click(function () {
+            var item = $(this);
+            item.toggleClass("closed open");
+            item.parents(".question").next(".answer").slideToggle(500);
+        });
+    });
 }(jQuery);

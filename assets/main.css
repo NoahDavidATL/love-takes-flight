@@ -333,6 +333,35 @@ section.hero .inner-hero {
     color: #353031;
 }
 
+.faqs h1 {
+    cursor: pointer;
+}
+
+.faqs li {
+    padding-left: 10px;
+}
+
+.faqs p b {
+    font-weight: 700 !important;
+}
+
+.faqs .answer {
+    padding-left: 10px;
+}
+
+.faqs h1 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.faq-item.closed {
+    list-style-type: disclosure-closed;
+}
+
+.faq-item.open {
+    list-style-type: disclosure-open;
+}
+
 .hero-content {
     color: #ffffff;
     position: relative;
