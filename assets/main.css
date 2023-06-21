@@ -325,6 +325,10 @@ section.hero .inner-hero {
     color: #FFF;
 }
 
+.scroll.mobile.grey {
+    color: #353031;
+}
+
 .header.switched-header .main-nav li a {
     color: #353031;
 }
