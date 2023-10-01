@@ -5,58 +5,38 @@
     $dbname = 'fftrealm_fftrealm';
     $dbuser = 'fftrealm_realm';
     $dbpasswd = '9s&&ypWFUbSPcMATUw';
+    $dsn = "$dbms:host=$dbhost;dbname=$dbname;charset=utf8";
 
     define('PHPBB_INSTALLED', true);
 
     function db_connect() {
-        global $dbhost, $dbname, $dbuser, $dbpasswd;
+        global $dsn, $dbuser, $dbpasswd;
 
-        $conn = new mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        try {
+            $conn = new PDO($dsn, $dbuser, $dbpasswd, [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ]);
+            return $conn;
+        } catch (PDOException $e) {
+            trigger_error("Database connection failed: " . $e->getMessage(), E_USER_ERROR);
+            return false;
         }
-
-        return $conn;
     }
 
     function db_query($query, $params = []) {
         $conn = db_connect();
+        if (!$conn) return false;
 
-        $stmt = $conn->prepare($query);
-        if ($stmt === false) {
-            trigger_error($conn->error, E_USER_ERROR);
+        try {
+            $stmt = $conn->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            trigger_error("Database query failed: " . $e->getMessage(), E_USER_ERROR);
             return false;
         }
-
-        if (!empty($params)) {
-            $types = str_repeat('s', count($params));
-            $stmt->bind_param($types, ...$params);
-        }
-
-        if (!$stmt->execute()) {
-            trigger_error($stmt->error, E_USER_ERROR);
-            $stmt->close();
-            $conn->close();
-            return false;
-        }
-
-        $result = $stmt->get_result();
-        if ($result === false) {
-            trigger_error($stmt->error, E_USER_ERROR);
-            $stmt->close();
-            $conn->close();
-            return false;
-        }
-
-        $data = [];
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-
-        $stmt->close();
-        $conn->close();
-        return $data;
     }
 
     function db_update($query, $params = []) {
