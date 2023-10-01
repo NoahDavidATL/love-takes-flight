@@ -34,7 +34,11 @@
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(xhr.responseText);
+                if(xhr.responseText.trim() == "RSVP submitted successfully.") {
+                    window.location.href = 'confirmation.html';
+                } else {
+                    alert(xhr.responseText);
+                }
             }
         }
 
