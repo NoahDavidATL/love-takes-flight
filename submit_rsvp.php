@@ -1,5 +1,9 @@
 <?php
-    include 'db_config.php';  // Assume this file contains your db_connect and db_query functions
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    include 'db_config.php';
 
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $class = filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING);
@@ -11,7 +15,8 @@
         $params = [$name, $class, $flight, $food];
         $result = db_query($query, $params);
         if ($result !== false) {
-            echo "RSVP submitted successfully.";
+            header('Location: confirmation.html');  // Redirect to confirmation.html
+            exit();
         } else {
             echo "Error submitting RSVP.";
         }
