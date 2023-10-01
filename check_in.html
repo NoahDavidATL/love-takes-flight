@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Form</title>
+</head>
+<body>
+
+<form id="rsvpForm" onsubmit="submitRSVP(); return false;">
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <input type="text" id="class" name="class" placeholder="Class" required>
+    <input type="text" id="dinner" name="dinner" placeholder="Dinner" required>
+    <input type="submit" value="Submit">
+</form>
+
+<script type="text/javascript">
+    function submitRSVP() {
+        var name = document.getElementById('name').value;
+        var classValue = document.getElementById('class').value;
+        var dinner = document.getElementById('dinner').value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'submit_rsvp.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            }
+        }
+
+        var params = 'name=' + encodeURIComponent(name) + '&class=' + encodeURIComponent(classValue) + '&dinner=' + encodeURIComponent(dinner);
+        xhr.send(params);
+    }
+</script>
+
+</body>
+</html>
