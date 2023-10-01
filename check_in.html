@@ -10,7 +10,14 @@
 <form id="rsvpForm" onsubmit="submitRSVP(); return false;">
     <input type="text" id="name" name="name" placeholder="Name" required>
     <input type="text" id="class" name="class" placeholder="Class" required>
-    <input type="text" id="dinner" name="dinner" placeholder="Dinner" required>
+    <input type="radio" id="flight-yes" name="flight" value="1" required> Yes
+    <input type="radio" id="flight-no" name="flight" value="0" required> No
+    <select id="food" name="food" required>
+        <option value="normal">Normal</option>
+        <option value="vegan">Vegan</option>
+        <option value="kosher">Kosher</option>
+        <option value="halal">Halal</option>
+    </select>
     <input type="submit" value="Submit">
 </form>
 
@@ -18,7 +25,8 @@
     function submitRSVP() {
         var name = document.getElementById('name').value;
         var classValue = document.getElementById('class').value;
-        var dinner = document.getElementById('dinner').value;
+        var flight = document.querySelector('input[name="flight"]:checked').value;
+        var food = document.getElementById('food').value;
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'submit_rsvp.php', true);
@@ -30,7 +38,7 @@
             }
         }
 
-        var params = 'name=' + encodeURIComponent(name) + '&class=' + encodeURIComponent(classValue) + '&dinner=' + encodeURIComponent(dinner);
+        var params = 'name=' + encodeURIComponent(name) + '&class=' + encodeURIComponent(classValue) + '&flight=' + encodeURIComponent(flight) + '&food=' + encodeURIComponent(food);
         xhr.send(params);
     }
 </script>
