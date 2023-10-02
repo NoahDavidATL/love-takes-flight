@@ -32,10 +32,21 @@
         xhr.open('POST', 'submit_rsvp.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                if (xhr.responseText.trim() === 'success') {
+                    window.location.href = 'confirmation.php';  // Redirect on success
+                } else {
+                    console.error('Error submitting RSVP:', xhr.responseText);
+                }
+            }
+        };
+
         var params = 'name=' + encodeURIComponent(name) + '&class=' + encodeURIComponent(classValue) + '&flight=' + encodeURIComponent(flight) + '&food=' + encodeURIComponent(food);
         xhr.send(params);
     }
 </script>
+
 
 </body>
 </html>

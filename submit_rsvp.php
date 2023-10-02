@@ -15,11 +15,11 @@
         $params = [$name, $class, $flight, $food];
         $result = db_query($query, $params);
         if ($result !== false) {
-            header('Location: confirmation.html');  // Redirect to confirmation.html
+            exit();
         } else {
-            echo "Error submitting RSVP.";
+            exit();
         }
     } else {
-        echo "Invalid input.";
+        exit();
     }
 ?>
