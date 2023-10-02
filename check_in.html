@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check In</title>
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <script src="https://unpkg.com/@material-ui/core@4/umd/material-ui.production.min.js"></script>
+    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.production.min.js"></script>
     <style>
         #root {
             display: flex;
@@ -94,10 +94,13 @@
         const [additionalGuests, setAdditionalGuests] = useState(0);
 
         const handleGuestChange = (index, key, value) => {
-            const newGuests = [...guests];
-            newGuests[index][key] = value;
-            setGuests(newGuests);
+            setGuests(prevGuests => {
+                const newGuests = [...prevGuests];
+                newGuests[index][key] = value;
+                return newGuests;
+            });
         };
+
 
         const handleAdditionalGuestsChange = (amount) => {
             const newCount = additionalGuests + amount;
@@ -112,6 +115,7 @@
         };
 
         const handleSubmit = () => {
+            console.log(guests);
             fetch('submit_rsvp.php', {
                 method: 'POST',
                 headers: {
