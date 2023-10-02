@@ -283,7 +283,13 @@ function App() {
                     <IconButton onClick={() => handleAdditionalGuestsChange(-1)} disabled={additionalGuests <= 0}>
                         <i className="material-icons">remove</i>
                     </IconButton>
-                    <span style={{fontFamily: 'Roboto, sans-serif'}}>{additionalGuests}</span>
+                    <span style={{
+                        fontFamily: 'Roboto, sans-serif',
+                        fontWeight: 700,
+                        fontSize: 24,
+                        position: 'relative',
+                        top: 4
+                    }}>{additionalGuests}</span>
                     <IconButton onClick={() => handleAdditionalGuestsChange(1)}>
                         <i className="material-icons">add</i>
                     </IconButton>
