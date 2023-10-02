@@ -18,6 +18,8 @@
             justify-content: center;
             min-height: 100vh;
             background-color: #f0f0f0;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;  /* Set font family globally */
         }
         .guest-box {
             margin-bottom: 16px;
@@ -29,6 +31,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
+
 </head>
 <body>
 
@@ -41,9 +44,9 @@
     function GuestForm({ index, handleGuestChange }) {
         return (
             <div className="guest-box">
-                <Box display={{ xs: 'block', md: 'flex' }} mb={2}>
+                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{padding: 0}}>
                     <TextField label="Full Name" variant="outlined" style={{ flex: 1, marginRight: 8 }} onChange={e => handleGuestChange(index, 'name', e.target.value)} />
-                    <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8 }}>
+                    <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}>
                         <InputLabel>Ticket Type</InputLabel>
                         <Select
                             defaultValue="Delta One"
@@ -132,23 +135,24 @@
                 {guests.map((guest, index) => (
                     <GuestForm key={index} index={index} handleGuestChange={handleGuestChange} />
                 ))}
-                <div className="guest-box" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>Select # of additional guests</div>
+                <div className="guest-box" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'Roboto, sans-serif' }}>
+                    <div style={{ fontFamily: 'Roboto, sans-serif' }}>Select # of additional guests</div>
                     <div>
                         <IconButton onClick={() => handleAdditionalGuestsChange(-1)} disabled={additionalGuests <= 0}>
                             <i className="material-icons">remove</i>
                         </IconButton>
-                        <span>{additionalGuests}</span>
+                        <span style={{ fontFamily: 'Roboto, sans-serif' }}>{additionalGuests}</span>
                         <IconButton onClick={() => handleAdditionalGuestsChange(1)}>
                             <i className="material-icons">add</i>
                         </IconButton>
                     </div>
                 </div>
-                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: 16 }}>
                     Submit
                 </Button>
             </div>
         );
+
     }
 
     ReactDOM.render(<App />, document.getElementById('root'));
