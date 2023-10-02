@@ -32,7 +32,7 @@
             border: 1px solid #ddd;
             background-color: #fff;
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .guest-box .ticket-type {
@@ -41,7 +41,8 @@
         /* Added media query for mobile devices */
         @media (max-width: 600px) {
             .guest-box {
-                width: 90%; /* Adjust width for smaller screens */
+                max-width: calc(100vw - 60px);
+                width: calc(100vw - 60px);
             }
             /* Make Full Name and Ticket Type take up the entire width */
             .guest-box .MuiTextField-root {
@@ -64,14 +65,23 @@
 
 <div id="root"></div>
 
+<script src="script.js"></script>
+
 <script type="text/babel">
     const { useState } = React;
-    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } = MaterialUI;
+    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ClickAwayListener } = MaterialUI;
 
     function GuestForm({ index, handleGuestChange }) {
         const [fullName, setFullName] = useState('');
         const [fullNameError, setFullNameError] = useState(false);
+        const [open, setOpen] = React.useState(false);
 
+        const handleTooltipClose = () => {
+            setOpen(false);
+        };
+        const handleTooltipOpen = () => {
+            setOpen(true);
+        };
         const handleFullNameChange = (e) => {
             const value = e.target.value;
             setFullName(value);
@@ -81,7 +91,7 @@
 
         return (
             <div className="guest-box">
-                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{ padding: 0 }}>
+                <Box display="flex" alignItems="center" width="100%" mb={2}>
                     <TextField
                         label="Full Name"
                         variant="outlined"
@@ -90,7 +100,9 @@
                         error={fullNameError} // Show error if fullNameError is true
                         helperText={fullNameError ? 'Full Name is required' : ''}
                     />
-                    <FormControl className="ticket-type" variant="outlined" style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}>
+                </Box>
+                <Box display="flex" alignItems="center" mb={2}>
+                    <FormControl variant="outlined" style={{ flex: 1, marginRight: 8 }}>
                         <InputLabel>Ticket Type</InputLabel>
                         <Select
                             defaultValue="Delta One"
@@ -103,6 +115,25 @@
                             <MenuItem value="Infant-in-Arms">Infant-in-Arms</MenuItem>
                         </Select>
                     </FormControl>
+                    <ClickAwayListener onClickAway={handleTooltipClose}>
+                        <div>
+                          <Tooltip
+                            PopperProps={{
+                              disablePortal: true,
+                            }}
+                            onClose={handleTooltipClose}
+                            open={open}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title="Add"
+                          >
+                            <IconButton onClick={handleTooltipOpen} color="primary">
+                                <i className="material-icons">info</i>
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                      </ClickAwayListener>
                 </Box>
                 <Box display="flex" alignItems="center" mb={2}>
                     <FormControl variant="outlined" style={{ flex: 1, marginRight: 8 }}>

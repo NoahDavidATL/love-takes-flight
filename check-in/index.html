@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check In</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://unpkg.com/@mui/material@5.11.0/umd/material-ui.production.min.js"></script>
+    <style>
+        #root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: calc(100vh - 100px);
+            background-color: #f0f0f0;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        body {
+            margin: 0;
+        }
+        .guest-box {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .guest-box .ticket-type {
+            margin-top: 0 !important;
+        }        
+        @media (max-width: 600px) {
+            .guest-box {
+                max-width: calc(100vw - 60px);
+                width: calc(100vw - 60px);
+            }
+            .guest-box .MuiTextField-root {
+                width: 100%;
+                margin-right: 0;
+            }
+            .guest-box .MuiFormControl-root {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 8px;
+            }
+            .guest-box .ticket-type {
+                margin-left: 0 !important;
+                margin-top: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel" src="script.js"></script>
+
+</body>
+</html>
