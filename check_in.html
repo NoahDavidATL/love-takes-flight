@@ -11,26 +11,32 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script src="https://unpkg.com/@mui/material@5.11.0/umd/material-ui.production.min.js"></script>
     <style>
-        #root {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f0f0f0;
-            width: 100%;
-            font-family: 'Roboto', sans-serif;
-        }
-        .guest-box {
-            margin-bottom: 16px;
-            padding: 16px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-    </style>
+       #root {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           min-height: 100vh;
+           background-color: #f0f0f0;
+           width: 100%;
+           font-family: 'Roboto', sans-serif;
+       }
+       .guest-box {
+           margin-bottom: 16px;
+           padding: 16px;
+           border: 1px solid #ddd;
+           background-color: #fff;
+           width: 100%;
+           max-width: 600px;
+           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+       }
+       /* Added media query for mobile devices */
+       @media (max-width: 600px) {
+           .guest-box {
+               width: 90%; /* Adjust width for smaller screens */
+           }
+       }
+   </style>
 </head>
 <body>
 
@@ -89,7 +95,7 @@
                             <MenuItem value="Other">Other</MenuItem>
                         </Select>
                     </FormControl>
-                    <Tooltip title="Around-the-world buffet includes many food types including vegetarian and gluten free options" arrow>
+                    <Tooltip disableFocusListener title="The around-the-world buffet includes many food types including vegetarian and gluten free options." arrow>
                         <IconButton color="primary">
                             <i className="material-icons">info</i>
                         </IconButton>
