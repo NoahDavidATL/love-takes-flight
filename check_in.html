@@ -9,7 +9,7 @@
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.production.min.js"></script>
+    <script src="https://unpkg.com/@mui/material@5.11.0/umd/material-ui.production.min.js"></script>
     <style>
         #root {
             display: flex;
@@ -19,7 +19,7 @@
             min-height: 100vh;
             background-color: #f0f0f0;
             width: 100%;
-            font-family: 'Roboto', sans-serif;  /* Set font family globally */
+            font-family: 'Roboto', sans-serif;
         }
         .guest-box {
             margin-bottom: 16px;
@@ -31,7 +31,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
-
 </head>
 <body>
 
@@ -39,33 +38,28 @@
 
 <script type="text/babel">
     const { useState } = React;
-    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box } = MaterialUI;
+    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } = MaterialUI;
 
     function GuestForm({ index, handleGuestChange }) {
-        // State for "Full Name" input value and error flag
-       const [fullName, setFullName] = useState('');
-       const [fullNameError, setFullNameError] = useState(false);
+        const [fullName, setFullName] = useState('');
+        const [fullNameError, setFullNameError] = useState(false);
 
-       // Handle "Full Name" input change
-       const handleFullNameChange = (e) => {
-           const value = e.target.value;
-           setFullName(value);
+        const handleFullNameChange = (e) => {
+            const value = e.target.value;
+            setFullName(value);
+            setFullNameError(value.trim() === ''); // Check if "Full Name" is empty
+            handleGuestChange(index, 'name', value);
+        };
 
-           // Check if "Full Name" is empty and set the error flag accordingly
-           setFullNameError(value.trim() === '');
-
-           // Pass the value to the parent component's handler
-           handleGuestChange(index, 'name', value);
-       };
         return (
             <div className="guest-box">
-                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{padding: 0}}>
+                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{ padding: 0 }}>
                     <TextField
                         label="Full Name"
                         variant="outlined"
                         style={{ flex: 1, marginRight: 8 }}
                         onChange={handleFullNameChange}
-                        error={fullNameError}  // Show error if fullNameError is true
+                        error={fullNameError} // Show error if fullNameError is true
                         helperText={fullNameError ? 'Full Name is required' : ''}
                     />
                     <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}>
@@ -114,15 +108,16 @@
     function App() {
         const [guests, setGuests] = useState([{ name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
         const [additionalGuests, setAdditionalGuests] = useState(0);
+        const [openDialog, setOpenDialog] = useState(false);
+        const [errorMessage, setErrorMessage] = useState('');
 
         const handleGuestChange = (index, key, value) => {
             setGuests(prevGuests => {
-                const newGuests = [...prevGuests];
-                newGuests[index][key] = value;
-                return newGuests;
-            });
+               const newGuests = [...prevGuests];
+               newGuests[index][key] = value;
+               return newGuests;
+           });
         };
-
 
         const handleAdditionalGuestsChange = (amount) => {
             const newCount = additionalGuests + amount;
@@ -137,24 +132,29 @@
         };
 
         const handleSubmit = () => {
-            console.log(guests);
-            fetch('submit_rsvp.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(guests),
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log('Success:', data);
-                window.location.href = 'confirmation.html';  // Redirect on success
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        };
+            const isFullNameEmpty = guests.some(guest => guest.name.trim() === '');
 
+            if (isFullNameEmpty) {
+                setErrorMessage('Please fill out all required fields (Full Name).');
+                setOpenDialog(true);
+            } else {
+                fetch('submit_rsvp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(guests),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                    window.location.href = 'confirmation.html';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        };
 
         return (
             <div>
@@ -171,13 +171,27 @@
                         </IconButton>
                     </div>
                 </div>
-                {/* Additional guests */}
                 {guests.slice(1).map((guest, index) => (
-                    <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange} />
+                   <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange} />
                 ))}
                 <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: 16 }}>
-                    Submit
+                    Complete Check In
                 </Button>
+
+                {/* Dialog for displaying error message */}
+                <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                    <DialogTitle>Error</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {errorMessage}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpenDialog(false)} color="primary">
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }
