@@ -293,12 +293,12 @@ function App() {
                 <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange}/>
             ))}
             <Button variant="contained" color="primary" onClick={handleSubmit} style={{marginTop: 16}}>
-                Complete Check-In
+                Complete Check In
             </Button>
 
             {/* Dialog for displaying error message */}
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-                <DialogTitle>Check-In Issue</DialogTitle>
+                <DialogTitle>Check In Issue</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {errorMessage}
