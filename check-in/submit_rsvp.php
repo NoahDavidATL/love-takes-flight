@@ -27,8 +27,8 @@ if ($data) {
         }
         $interestInFlightSimulator = 1 ? 'Yes' : 'No';
         $to = 'hithere@hey.com';
-        $subject = '[LoveTakesFlight] New RSVP Registered';
-        $message = "A new guest, $name, has checked-in ($ticketType, $specialMeals, $interestInFlightSimulator).";
+        $subject = '[LoveTakesFlight] New RSVP';
+        $message = "$name has checked-in ($ticketType, $specialMeals, $interestInFlightSimulator).";
         $headers = 'From: support@lovetakesflight2023.com' . "\r\n" .
             'Reply-To: support@lovetakesflight2023.com' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
