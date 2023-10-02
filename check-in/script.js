@@ -272,6 +272,14 @@ function App() {
 
     return (
         <div>
+            <div className="header-container">
+                <div className="header-text">
+                    TIME TO CHECK IN
+                </div>
+                <div className="subheader-text">
+                    WE LOOK FORWARD TO SEEING YOU SOON
+                </div>
+            </div>
             <GuestForm key={0} index={0} handleGuestChange={handleGuestChange}/>
             <div className="guest-box" style={{
                 display: 'flex',

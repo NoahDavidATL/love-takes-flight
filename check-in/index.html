@@ -12,40 +12,66 @@
     <script src="https://unpkg.com/@mui/material@5.11.0/umd/material-ui.production.min.js"></script>
     <style>
         #root {
+            position: relative;
+            background-color: rgba(240, 240, 240, 0.15);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: start;
             min-height: calc(100vh - 100px);
-            background-color: #f0f0f0;
             width: 100%;
             font-family: 'Roboto', sans-serif;
             padding-top: 50px;
             padding-bottom: 50px;
-            margin-top: -130px
         }
-
         body {
             margin: 0;
+            background-image: url('https://pbs.twimg.com/media/DhUsMR6X4AAW0Rp?format=jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-
+        .header-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 16px;
+        }
+        .header-text {
+            font-size: 48px;
+            color: #fff;
+            width: 100%;
+            padding: 20px 0 0 0;
+            margin-top: -50px;
+            text-align: center;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* X-offset, Y-offset, Blur, Color */
+        }
+        .subheader-text {
+            font-size: 20.5px;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* X-offset, Y-offset, Blur, Color */
+            padding: 0 0 10px 0;
+        }
         .guest-box {
             margin-bottom: 16px;
             padding: 16px;
             border: 1px solid #ddd;
             background-color: #fff;
             width: 100%;
-            max-width: 800px;
+            max-width: 374px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .guest-box .ticket-type {
             margin-top: 0 !important;
         }
 
         @media (max-width: 600px) {
-            #root {
-                margin-top: -80px;
+            .header-text {
+                font-size: 40px;
+            }
+            .subheader-text {
+                font-size: 17px;
             }
             .guest-box {
                 max-width: calc(100vw - 60px);
@@ -71,21 +97,8 @@
     </style>
 </head>
 <body>
-<img
-    src="https://pbs.twimg.com/media/DhUsMR6X4AAW0Rp?format=jpg"
-    alt="Top Image"
-    style="
-        width: 100%;
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    "
-/>
+    <div id="root" style="flex: 1;"></div>
 
-<div id="root"></div>
-
-<script type="text/babel" src="script.js"></script>
-
+    <script type="text/babel" src="script.js"></script>
 </body>
 </html>
