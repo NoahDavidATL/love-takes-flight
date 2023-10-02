@@ -128,6 +128,7 @@ function GuestForm({index, handleGuestChange}) {
                         <MenuItem value="Kosher">Kosher</MenuItem>
                         <MenuItem value="Halal">Halal</MenuItem>
                         <MenuItem value="Other">Other</MenuItem>
+                        <MenuItem value="None">No Special Meal</MenuItem>
                     </Select>
                 </FormControl>
                 <ClickAwayListener onClickAway={() => handleTooltipClose('tooltip2')}>
