@@ -1,62 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check In</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="https://unpkg.com/@material-ui/core/umd/material-ui.production.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check In</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://unpkg.com/@material-ui/core@4/umd/material-ui.production.min.js"></script>
+    <style>
+        #root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;  /* Set font family globally */
+        }
+        .guest-box {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
 
-<style>
-    #root {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background-color: #f0f0f0;
-        width: 100%;
-        font-family: 'Roboto', sans-serif;  /* Set font family globally */
-    }
-    .guest-box {
-        margin-bottom: 16px;
-        padding: 16px;
-        border: 1px solid #ddd;
-        background-color: #fff;
-        width: 100%;
-        max-width: 600px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-</style>
 </head>
 <body>
 
 <div id="root"></div>
 
 <script type="text/babel">
-    const {
-        Button, TextField, FormControl, InputLabel, Select, MenuItem,
-        Box, FormControlLabel, Checkbox, IconButton, Tooltip
-    } = window['material-ui'];
+    const { useState } = React;
+    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box } = MaterialUI;
 
     function GuestForm({ index, handleGuestChange }) {
         return (
             <div className="guest-box">
-                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{ padding: 0 }}>
-                    <TextField
-                        label="Full Name"
-                        variant="outlined"
-                        style={{ flex: 1, marginRight: 8 }}
-                        onChange={e => handleGuestChange(index, 'name', e.target.value)}
-                    />
-                    <FormControl
-                        variant="outlined"
-                        style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}
-                    >
+                <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{padding: 0}}>
+                    <TextField label="Full Name" variant="outlined" style={{ flex: 1, marginRight: 8 }} onChange={e => handleGuestChange(index, 'name', e.target.value)} />
+                    <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}>
                         <InputLabel>Ticket Type</InputLabel>
                         <Select
                             defaultValue="Delta One"
@@ -100,54 +90,49 @@
     }
 
     function App() {
-        const [guests, setGuests] = React.useState([{ name: 'Noah', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
-        const [additionalGuests, setAdditionalGuests] = React.useState(0);
+        const [guests, setGuests] = useState([{ name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
+        const [additionalGuests, setAdditionalGuests] = useState(0);
 
-        const handleGuestChange = (index, field, value) => {
-            const updatedGuests = guests.slice();
-            updatedGuests[index][field] = value;
-            setGuests(updatedGuests);
+        const handleGuestChange = (index, key, value) => {
+            const newGuests = [...guests];
+            newGuests[index][key] = value;
+            setGuests(newGuests);
         };
 
-        const handleAdditionalGuestsChange = delta => {
-            const newAdditionalGuests = additionalGuests + delta;
-            if (newAdditionalGuests < 0) return;
-
-            const updatedGuests = guests.slice();
-            if (delta > 0) {
-                for (let i = 0; i < delta; i++) {
-                    updatedGuests.push({ name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 });
+        const handleAdditionalGuestsChange = (amount) => {
+            const newCount = additionalGuests + amount;
+            if (newCount >= 0) {
+                setAdditionalGuests(newCount);
+                if (amount > 0) {
+                    setGuests([...guests, { name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
+                } else {
+                    setGuests(guests.slice(0, guests.length - 1));
                 }
-            } else {
-                updatedGuests.splice(-delta);
             }
-            setGuests(updatedGuests);
-            setAdditionalGuests(newAdditionalGuests);
         };
 
         const handleSubmit = () => {
             fetch('submit_rsvp.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(guests)
+                body: JSON.stringify(guests),
             })
             .then(response => response.text())
             .then(data => {
-                if (data === 'success') {
-                    window.location.href = 'confirmation.html';
-                } else {
-                    alert('Error submitting RSVP: ' + data);
-                }
+                console.log('Success:', data);
+                window.location.href = 'confirmation.php';  // Redirect on success
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
         };
 
+
         return (
             <div>
-                {guests.slice(0, 1).map((guest, index) => (
-                    <GuestForm key={index} index={index} handleGuestChange={handleGuestChange} />
-                ))}
+                <GuestForm key={0} index={0} handleGuestChange={handleGuestChange} />  {/* First guest */}
                 <div className="guest-box" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'Roboto, sans-serif' }}>
                     <div style={{ fontFamily: 'Roboto, sans-serif' }}>Select # of additional guests</div>
                     <div>
@@ -160,7 +145,7 @@
                         </IconButton>
                     </div>
                 </div>
-                {guests.slice(1).map((guest, index) => (
+                {guests.slice(1).map((guest, index) => (  {/* Additional guests */}
                     <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange} />
                 ))}
                 <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: 16 }}>
