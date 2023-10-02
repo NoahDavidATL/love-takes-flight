@@ -24,6 +24,23 @@ if ($data) {
 
         if (!db_update($query, $params)) {
             echo 'Error: Database update failed for guest: ' . $name;
+        } else {
+            if ($specialMeals == null) {
+                $specialMeals = "Buffet";
+            }
+            $interestInFlightSimulator = 1 ? 'Yes' : 'No';
+            $to = 'hithere@hey.com';
+            $subject = '[LoveTakesFlight] New RSVP Registered';
+            $message = "A new guest, $name, has checked-in ($ticketType, $specialMeals, $interestInFlightSimulator).";
+            $headers = 'From: support@lovetakesflight2023.com' . "\r\n" .
+                'Reply-To: support@lovetakesflight2023.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+            if (mail($to, $subject, $message, $headers)) {
+                echo 'Email sent successfully.';
+            } else {
+                echo 'Email sending failed.';
+            }
         }
     }
 
