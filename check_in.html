@@ -42,10 +42,32 @@
     const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box } = MaterialUI;
 
     function GuestForm({ index, handleGuestChange }) {
+        // State for "Full Name" input value and error flag
+       const [fullName, setFullName] = useState('');
+       const [fullNameError, setFullNameError] = useState(false);
+
+       // Handle "Full Name" input change
+       const handleFullNameChange = (e) => {
+           const value = e.target.value;
+           setFullName(value);
+
+           // Check if "Full Name" is empty and set the error flag accordingly
+           setFullNameError(value.trim() === '');
+
+           // Pass the value to the parent component's handler
+           handleGuestChange(index, 'name', value);
+       };
         return (
             <div className="guest-box">
                 <Box display={{ xs: 'block', md: 'flex' }} mb={2} width="100%" style={{padding: 0}}>
-                    <TextField label="Full Name" variant="outlined" style={{ flex: 1, marginRight: 8 }} onChange={e => handleGuestChange(index, 'name', e.target.value)} />
+                    <TextField
+                        label="Full Name"
+                        variant="outlined"
+                        style={{ flex: 1, marginRight: 8 }}
+                        onChange={handleFullNameChange}
+                        error={fullNameError}  // Show error if fullNameError is true
+                        helperText={fullNameError ? 'Full Name is required' : ''}
+                    />
                     <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8, marginTop: window.innerWidth <= 600 ? 8 : 0 }}>
                         <InputLabel>Ticket Type</InputLabel>
                         <Select
