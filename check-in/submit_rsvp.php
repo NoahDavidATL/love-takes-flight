@@ -25,7 +25,7 @@ if ($data) {
         if ($specialMeals == null) {
             $specialMeals = "Buffet";
         }
-        $interestInFlightSimulator = 1 ? 'Yes' : 'No';
+        $interestInFlightSimulator == 1 ? 'Yes' : 'No';
         $to = 'hithere@hey.com';
         $subject = '[LoveTakesFlight] New RSVP';
         $message = "$name has checked-in ($ticketType, $specialMeals, $interestInFlightSimulator).";
