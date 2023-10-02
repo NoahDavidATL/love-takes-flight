@@ -34,11 +34,7 @@
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                if (xhr.responseText.trim() === 'success') {
-                    window.location.href = 'confirmation.php';  // Redirect on success
-                } else {
-                    console.error('Error submitting RSVP:', xhr.responseText);
-                }
+                window.location.href = 'confirmation.html';  // Redirect on success without checking response
             }
         };
 
