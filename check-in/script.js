@@ -279,7 +279,7 @@ function App() {
                 fontFamily: 'Roboto, sans-serif'
             }}>
                 <div style={{fontFamily: 'Roboto, sans-serif'}}>Select # of Additional Guests</div>
-                <div>
+                <div style={{textWrap: 'nowrap'}}>
                     <IconButton onClick={() => handleAdditionalGuestsChange(-1)} disabled={additionalGuests <= 0}>
                         <i className="material-icons">remove</i>
                     </IconButton>
