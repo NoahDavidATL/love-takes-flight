@@ -145,7 +145,8 @@
                         </IconButton>
                     </div>
                 </div>
-                {guests.slice(1).map((guest, index) => (  {/* Additional guests */}
+                {/* Additional guests */}
+                {guests.slice(1).map((guest, index) => (
                     <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange} />
                 ))}
                 <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: 16 }}>
