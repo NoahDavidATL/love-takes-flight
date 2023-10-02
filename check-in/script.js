@@ -89,7 +89,7 @@ function GuestForm({index, handleGuestChange}) {
                             disableHoverListener
                             disableTouchListener
                             title={
-                                <React.Fragment>
+                                <>
                                     <Typography color="inherit">
                                         <b>DELTA ONE</b>: Adults 21+ with access to all you can eat and drink
                                         (including
@@ -107,7 +107,7 @@ function GuestForm({index, handleGuestChange}) {
                                         diapers. These children will sit with the adults for dinner (Hanger Two). Please
                                         bring your own food for these guests unless they will eat mac & cheese.
                                     </Typography>
-                                </React.Fragment>
+                                </>
                             }
                         >
                             <IconButton onClick={() => handleTooltipOpen('tooltip1')} color="primary">
@@ -142,7 +142,7 @@ function GuestForm({index, handleGuestChange}) {
                             disableHoverListener
                             disableTouchListener
                             title={
-                                <React.Fragment>
+                                <>
                                     <Typography color="inherit">
                                         The Delta One buffet will include many food options, including
                                         a variety of <b>vegetarian</b> and <b>gluten-free</b> dishes.<br/><br/>
@@ -150,7 +150,7 @@ function GuestForm({index, handleGuestChange}) {
                                         will reach out to you a few weeks before the event to confirm your dietary
                                         restrictions.
                                     </Typography>
-                                </React.Fragment>
+                                </>
                             }
                         >
                             <IconButton onClick={() => handleTooltipOpen('tooltip2')} color="primary">
@@ -169,39 +169,41 @@ function GuestForm({index, handleGuestChange}) {
                 }
                 label={
                     <span>
-            Interest in Flight Simulator
-            <ClickAwayListener onClickAway={() => handleTooltipClose('tooltip3')}>
-                <div style={{display: 'inline-block', marginLeft: 8}}>  {/* Adjust styling as needed */}
-                    <Tooltip
-                        PopperProps={{
-                            disablePortal: true,
-                        }}
-                        onClose={() => handleTooltipClose('tooltip3')}
-                        open={openTooltips.tooltip3}
-                        disableFocusListener
-                        disableHoverListener
-                        disableTouchListener
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">
-                                    The 737 Flight Simulator sessions last approximately 30 minutes. If you've ever
-                                    dreamt of piloting a real Boeing 737 (with the guidance of a certified flight
-                                    trainer) express your interest and we'll ensure this one-of-a-kind wedding
-                                    experience becomes a reality!
-                                </Typography>
-                            </React.Fragment>
-                        }
-                    >
-                        <IconButton onClick={() => handleTooltipOpen('tooltip3')} color="primary">
-                            <i className="material-icons">info</i>
-                        </IconButton>
-                    </Tooltip>
-                </div>
-            </ClickAwayListener>
-        </span>
+                        Interest in Flight Simulator
+                        <ClickAwayListener onClickAway={() => handleTooltipClose('tooltip3')}>
+                            <div style={{display: 'inline-block', marginLeft: 8}}>  {/* Adjust styling as needed */}
+                                <Tooltip
+                                    PopperProps={{
+                                        disablePortal: true,
+                                    }}
+                                    onClose={() => handleTooltipClose('tooltip3')}
+                                    open={openTooltips.tooltip3}
+                                    disableFocusListener
+                                    disableHoverListener
+                                    disableTouchListener
+                                    title={
+                                        <>
+                                            <Typography color="inherit">
+                                                The 737 Flight Simulator sessions last approximately 30 minutes. If
+                                                you've ever
+                                                dreamt of piloting a real Boeing 737 (with the guidance of a certified
+                                                flight
+                                                trainer) express your interest and we'll ensure this one-of-a-kind
+                                                wedding
+                                                experience becomes a reality!
+                                            </Typography>
+                                        </>
+                                    }
+                                >
+                                    <IconButton onClick={() => handleTooltipOpen('tooltip3')} color="primary">
+                                        <i className="material-icons">info</i>
+                                    </IconButton>
+                                </Tooltip>
+                            </div>
+                        </ClickAwayListener>
+                    </span>
                 }
             />
-
         </div>
     );
 }
