@@ -5,21 +5,27 @@
 
     include 'db_config.php';
 
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-    $class = filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING);
-    $flight = filter_input(INPUT_POST, 'flight', FILTER_SANITIZE_NUMBER_INT);
-    $food = filter_input(INPUT_POST, 'food', FILTER_SANITIZE_STRING);
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    if ($name && $class && $flight !== false && in_array($food, ['normal', 'vegan', 'kosher', 'halal'])) {
-        $query = "INSERT INTO {$table_prefix}rsvp (name, class, flight, food) VALUES (?, ?, ?, ?)";
-        $params = [$name, $class, $flight, $food];
-        $result = db_query($query, $params);
-        if ($result !== false) {
-            exit();
-        } else {
-            exit();
+    if ($data) {
+        foreach ($data as $guest) {
+            $name = $guest['name'];
+            $ticketType = $guest['ticketType'];
+            $specialMeals = $guest['specialMeals'];
+            $interestInFlightSimulator = $guest['interestInFlightSimulator'];
+
+            // Assuming you have a table named 'phpbb_rsvp' with columns as mentioned
+            $query = "INSERT INTO phpbb_rsvp (name, class, food, flight) VALUES (?, ?, ?, ?)";
+            $params = [$name, $ticketType, $specialMeals, $interestInFlightSimulator];
+
+            if (!db_update($query, $params)) {
+                echo 'Error: Database update failed.';
+                exit;
+            }
         }
+
+        echo 'success';
     } else {
-        exit();
+        echo 'Error: Invalid or missing data.';
     }
 ?>

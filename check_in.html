@@ -3,46 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSVP Form</title>
+    <title>Check In</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://unpkg.com/@material-ui/core@4/umd/material-ui.production.min.js"></script>
+    <style>
+        #root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .guest-box {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
 
-<form id="rsvpForm" onsubmit="submitRSVP(); return false;">
-    <input type="text" id="name" name="name" placeholder="Name" required>
-    <input type="text" id="class" name="class" placeholder="Class" required>
-    <input type="radio" id="flight-yes" name="flight" value="1" required> Yes
-    <input type="radio" id="flight-no" name="flight" value="0" required> No
-    <select id="food" name="food" required>
-        <option value="normal">Normal</option>
-        <option value="vegan">Vegan</option>
-        <option value="kosher">Kosher</option>
-        <option value="halal">Halal</option>
-    </select>
-    <input type="submit" value="Submit">
-</form>
+<div id="root"></div>
 
-<script type="text/javascript">
-    function submitRSVP() {
-        var name = document.getElementById('name').value;
-        var classValue = document.getElementById('class').value;
-        var flight = document.querySelector('input[name="flight"]:checked').value;
-        var food = document.getElementById('food').value;
+<script type="text/babel">
+    const { useState } = React;
+    const { TextField, Select, MenuItem, FormControl, InputLabel, Tooltip, IconButton, Checkbox, FormControlLabel, Button, Box } = MaterialUI;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'submit_rsvp.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    function GuestForm({ index, handleGuestChange }) {
+        return (
+            <div className="guest-box">
+                <Box display={{ xs: 'block', md: 'flex' }} mb={2}>
+                    <TextField label="Full Name" variant="outlined" style={{ flex: 1, marginRight: 8 }} onChange={e => handleGuestChange(index, 'name', e.target.value)} />
+                    <FormControl variant="outlined" style={{ flex: 1, marginLeft: 8 }}>
+                        <InputLabel>Ticket Type</InputLabel>
+                        <Select
+                            defaultValue="Delta One"
+                            label="Ticket Type"
+                            onChange={e => handleGuestChange(index, 'ticketType', e.target.value)}
+                        >
+                            <MenuItem value="Delta One">Delta One</MenuItem>
+                            <MenuItem value="Comfort Plus">Comfort Plus</MenuItem>
+                            <MenuItem value="Unaccompanied Minors">Unaccompanied Minors</MenuItem>
+                            <MenuItem value="Infant-in-Arms">Infant-in-Arms</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                <Box display="flex" alignItems="center" mb={2}>
+                    <FormControl variant="outlined" style={{ flex: 1, marginRight: 8 }}>
+                        <InputLabel>Special Meals</InputLabel>
+                        <Select
+                            label="Special Meals"
+                            onChange={e => handleGuestChange(index, 'specialMeals', e.target.value)}
+                        >
+                            <MenuItem value="Vegan">Vegan</MenuItem>
+                            <MenuItem value="Kosher">Kosher</MenuItem>
+                            <MenuItem value="Halal">Halal</MenuItem>
+                            <MenuItem value="Other">Other</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <Tooltip title="Around-the-world buffet includes many food types including vegetarian and gluten free options" arrow>
+                        <IconButton color="primary">
+                            <i className="material-icons">info</i>
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+                <FormControlLabel
+                    control={
+                        <Checkbox onChange={e => handleGuestChange(index, 'interestInFlightSimulator', e.target.checked ? 1 : 0)} color="primary" />
+                    }
+                    label="Interest in Flight Simulator"
+                />
+            </div>
+        );
+    }
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                window.location.href = 'confirmation.html';  // Redirect on success without checking response
+    function App() {
+        const [guests, setGuests] = useState([{ name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
+        const [additionalGuests, setAdditionalGuests] = useState(0);
+
+        const handleGuestChange = (index, key, value) => {
+            const newGuests = [...guests];
+            newGuests[index][key] = value;
+            setGuests(newGuests);
+        };
+
+        const handleAdditionalGuestsChange = (amount) => {
+            const newCount = additionalGuests + amount;
+            if (newCount >= 0) {
+                setAdditionalGuests(newCount);
+                if (amount > 0) {
+                    setGuests([...guests, { name: '', ticketType: 'Delta One', specialMeals: '', interestInFlightSimulator: 0 }]);
+                } else {
+                    setGuests(guests.slice(0, guests.length - 1));
+                }
             }
         };
 
-        var params = 'name=' + encodeURIComponent(name) + '&class=' + encodeURIComponent(classValue) + '&flight=' + encodeURIComponent(flight) + '&food=' + encodeURIComponent(food);
-        xhr.send(params);
-    }
-</script>
+        const handleSubmit = () => {
+            fetch('submit_rsvp.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(guests),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = 'confirmation.php';  // Redirect on success
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        };
 
+
+        return (
+            <div>
+                {guests.map((guest, index) => (
+                    <GuestForm key={index} index={index} handleGuestChange={handleGuestChange} />
+                ))}
+                <div className="guest-box" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>Select # of additional guests</div>
+                    <div>
+                        <IconButton onClick={() => handleAdditionalGuestsChange(-1)} disabled={additionalGuests <= 0}>
+                            <i className="material-icons">remove</i>
+                        </IconButton>
+                        <span>{additionalGuests}</span>
+                        <IconButton onClick={() => handleAdditionalGuestsChange(1)}>
+                            <i className="material-icons">add</i>
+                        </IconButton>
+                    </div>
+                </div>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    Submit
+                </Button>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+</script>
 
 </body>
 </html>
