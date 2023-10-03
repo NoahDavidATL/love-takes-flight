@@ -262,7 +262,7 @@ function App() {
                 .then(response => response.text())
                 .then(data => {
                     console.log('Success:', data);
-                    window.location.href = 'confirmation.html';
+                    window.location.href = '/confirmation';
                 })
                 .catch((error) => {
                     console.error('Error:', error);
