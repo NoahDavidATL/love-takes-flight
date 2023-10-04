@@ -250,7 +250,7 @@ function App() {
             .then(response => response.text())
             .then(data => {
                 console.log('Success:', data);
-                window.location.href = action === 'accept' ? '/confirmation' : '/declined';
+//                window.location.href = action === 'accept' ? '/confirmation' : '/declined';
             })
             .catch((error) => {
                 console.error('Error:', error);
