@@ -3,12 +3,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include '../db/db_config.php';
+include 'db_config.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data) {
-    foreach ($data as $guest) {
+$action = $data['action'];
+$guests = $data['guests'];
+
+if ($action && $guests) {
+    foreach ($guests as $guest) {
         if (!isset($guest['name']) || !isset($guest['ticketType'])) {
             echo 'Error: Missing data for one or more guests.';
             continue;  // Skip to the next iteration if any data is missing
@@ -32,7 +35,11 @@ if ($data) {
         }
         $to = 'hithere@hey.com';
         $subject = '[LoveTakesFlight] New RSVP';
-        $message = "$name has checked-in ($ticketType, $specialMeals, $interestInFlightSimulator).";
+        $message = "$name has checked-in (Ticket: $ticketType, Meal: $specialMeals, Flight Sim: $interestInFlightSimulator).";
+        if ($action === 'decline') {
+            $subject = '[LoveTakesFlight] RSVP Declined';
+            $message = "$name has declined (Ticket: $ticketType, Meal: $specialMeals, Flight Sim: $interestInFlightSimulator).";
+        }
         $headers = 'From: support@lovetakesflight2023.com' . "\r\n" .
             'Reply-To: support@lovetakesflight2023.com' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();

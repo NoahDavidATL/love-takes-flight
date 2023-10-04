@@ -233,7 +233,7 @@ function App() {
         }
     };
 
-    const handleSubmit = () => {
+    const handleRSVP = (action) => {
         const isFullNameEmpty = guests.some(guest => guest.name.trim() === '');
 
         if (isFullNameEmpty) {
@@ -245,16 +245,16 @@ function App() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(guests),
+                body: JSON.stringify({ action, guests }),
             })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = '/confirmation';
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = action === 'accept' ? '/confirmation' : '/declined';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         }
     };
 
@@ -295,9 +295,14 @@ function App() {
             {guests.slice(1).map((guest, index) => (
                 <GuestForm key={index + 1} index={index + 1} handleGuestChange={handleGuestChange}/>
             ))}
-            <Button variant="contained" color="primary" onClick={handleSubmit} style={{marginTop: 16}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '410px', marginTop: '16px' }}>
+            <Button variant="contained" color="primary" onClick={() => handleRSVP('accept')}>
                 Complete Check In
             </Button>
+            <Button variant="contained" color="error" onClick={() => handleRSVP('decline')}>
+                Send Regards
+            </Button>
+            </div>
 
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
                 <DialogTitle>Check In Issue</DialogTitle>

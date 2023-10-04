@@ -1087,8 +1087,8 @@
             <div class="row vertical-align">
                 <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 ">
                     <h1 class="title">RSVP</h1>`
-                    <p class="mt-20 pd-r20">You can "Check-In" to our wedding beginning on <span
-                        style="font-weight: 700">Oct. 16</span>.<br/>
+                    <p class="mt-20 pd-r20" id="check-in-blerb">You can "Check In" to our wedding beginning on <span
+                        style="fonto-weight: 700">Oct. 09</span>.<br/>
                         <a
                             target="_blank"
                             href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=Nzc5c29kZGR2bzlqYWRkNTN2cDUzdHRzcjAgbm9haGsxN0Bt&amp;tmsrc=noahk17%40gmail.com"
@@ -1099,7 +1099,7 @@
                 </div>
                 <div class="col-md-5 col-sm-5 ">
                     <div class="block-registry">
-                        <img src="./assets/coming-soon.jpg" alt="Check-In coming soon"/>
+                        <img src="./assets/coming-soon.jpg" alt="Check In Now"/>
                     </div>
                 </div>
             </div>
@@ -1341,7 +1341,7 @@
                         <h1 class="question">
                             <li class="faq-item closed pb-10">I can’t wait!! When and how do we RSVP?</li>
                         </h1>
-                        <p class="answer">We can’t wait either! You can RSVP starting October 16 (<a
+                        <p class="answer">We can’t wait either! You can RSVP starting October 09 (<a
                             target="_blank"
                             href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=Nzc5c29kZGR2bzlqYWRkNTN2cDUzdHRzcjAgbm9haGsxN0Bt&amp;tmsrc=noahk17%40gmail.com"
                         >click here for a calendar reminder!</a>) right on this site!</p>
@@ -1512,16 +1512,23 @@
             item.toggleClass("closed open");
             item.parents(".question").next(".answer").slideToggle(500);
         });
+
         /* RSVP Check-In Modal */
         var today = new Date();
-        var start = new Date('October 12, 2023');
+        var start = new Date('October 09, 2023');
         var end = new Date('November 20, 2023');
         var modalInteracted = localStorage.getItem('modalInteracted');
+
+        /* Check-In Image */
+        if (today >= start) {
+            $('.block-registry').html('<a href="/check-in"><img src="./assets/check-in.webp" alt="Check In Now"/></a>');
+            $('#check-in-blerb').html('You can now “Check In” to our wedding! Click the image to let us know if you can make it or not.');
+        }
 
         if (!modalInteracted && today >= start && today <= end) {
             var modal = document.getElementById('myModal');
             var span = document.getElementsByClassName('close')[0];
-            modal.style.display = 'block';
+            modal.style.dispflay = 'block';
 
             span.onclick = function () {
                 setModalInteracted();
@@ -1538,8 +1545,8 @@
 <!-- Inside <body> -->
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
-        <a href="/check-in" onclick="setModalInteracted()"><img src="/assets/timeto.webp" alt="Click to RSVP" class="modal-image"></a>
+        <span class="close"></span>
+        <a href="/check-in" onclick="setModalInteracted()"><img src="/assets/check-in.webp" alt="Click to RSVP" class="modal-image"></a>
     </div>
 </div>
 

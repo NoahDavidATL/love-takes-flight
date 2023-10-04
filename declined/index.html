@@ -19,7 +19,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check-In Confirmation</title>
+    <title>Sorry You Can't Make It</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -30,11 +30,13 @@
     <style>
         #root {
             background-color: rgba(240, 240, 240, 0.25);
+            height: 100vh;
+            width: 100vw;
         }
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            background-image: url('../assets/confirm.webp');
+            background-image: url('../assets/sorry.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -47,7 +49,7 @@
         }
         .header-text {
             font-size: 48px;
-            color: #fff;
+            color: #FFF;
             width: 100%;
             padding: 20px 0 0 0;
             margin-top: -50px;
@@ -56,45 +58,11 @@
         }
         .subheader-text {
             font-size: 20.5px;
-            color: #fff;
+            color: #FFF;
             width: 100%;
             text-align: center;
             text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
             padding: 0 0 10px 0;
-        }
-        .gradientBox {
-            background: linear-gradient(160deg, #4F145C, #71217F);
-            color: #f7f7f7;
-            position: relative;
-            width: 400px;
-            height: 350px;
-            margin: auto;
-            marginTop: 20px;
-            borderRadius: 8px;
-            border-top: 4px solid #4F145C;
-            border-right: 4px solid #4F145C;
-            border-left: 4px solid #4F145C;
-        }
-        .pillContainer {
-            width: 400px;
-            background-color: #f7f7f7;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
-            margin: -4px auto 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 4px solid #4F145C;
-            border-right: 4px solid #4F145C;
-            border-left: 4px solid #4F145C;
-        }
-        
-        .pill {
-            border-radius: 25px;
-            padding: 8px 20px;
-            flex: 1;
-            text-align: center;
-            font-size: 12px;
-            margin: 10px 5px 5px;
         }
 
         @media (max-width: 600px) {
@@ -103,15 +71,6 @@
             }
             .subheader-text {
                 font-size: 17px;
-            }
-            .gradientBox {
-                width: auto;
-            }
-            .pillContainer {
-                width: auto;
-                border-right: 4px solid #4F145C;
-                border-left: 4px solid #4F145C;
-                border-bottom: 4px solid #4F145C;
             }
         }
     </style>

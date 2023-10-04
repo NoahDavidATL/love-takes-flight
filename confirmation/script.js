@@ -1,4 +1,3 @@
-const {useState} = React;
 const {
     Accordion,
     AccordionSummary,
