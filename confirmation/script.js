@@ -47,7 +47,7 @@ const accordionData = [
     },
     {
         question: "Is there Saturday Morning Yoga?",
-        answer: "Why yes, yes there is. Stop by the Lambert Room in the Renaissance next to the restaurant at 7 am to join.",
+        answer: "Why yes, yes there is. Stop by the Lambert Room in the Renaissance next to the restaurant at 8:30 am to join.",
         iconClass: "fa-duotone fa-dumbbell fa-xl"
     },
     {

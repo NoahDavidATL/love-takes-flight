@@ -72,7 +72,6 @@ function GuestForm({index, handleGuestChange}) {
                         onChange={e => handleGuestChange(index, 'ticketType', e.target.value)}
                     >
                         <MenuItem value="Delta One">Delta One</MenuItem>
-                        <MenuItem value="Comfort Plus">Comfort Plus</MenuItem>
                         <MenuItem value="Unaccompanied Minors">Unaccompanied Minors</MenuItem>
                         <MenuItem value="Infant-in-Arms">Infant-in-Arms</MenuItem>
                     </Select>
@@ -91,21 +90,10 @@ function GuestForm({index, handleGuestChange}) {
                             title={
                                 <>
                                     <Typography color="inherit">
-                                        <b>DELTA ONE</b>: Adults 21+ with access to all you can eat and drink
-                                        (including
-                                        unlimited beer, wine, and spirits). These guests will also have access to the
-                                        737 Flight Simulator. Seating will be in Hanger Two.<br/><br/>
-                                        <b>COMFORT PLUS</b>: Young Adults aged 12+ who are not legally allowed to drink
-                                        alcohol. These guests will sit with the adults for dinner (Hanger Two) and will
-                                        have access to all you can eat and drink (soda, etc). These guests will also
-                                        have access to the 737 Flight Simulator with parents permission.<br/><br/>
-                                        <b>UNACCOMPANIED MINORS</b>: Children aged 3 to 11. These children will sit in a
-                                        separate area away from the adults with babysitters (Hanger One). Food
-                                        appropriate for children will be provided for these guests unless otherwise
-                                        noted by their parents.<br/><br/>
-                                        <b>INFANT-IN-ARMS</b>: Children under 3 years old or children who are still in
-                                        diapers. These children will sit with the adults for dinner (Hanger Two). Please
-                                        bring your own food for these guests unless they will eat mac & cheese.
+                                        <b>DELTA ONE</b>: Premium seating in Hanger Two with the open bar and a live band. Includes access to the
+                                        737 Flight Simulator.<br/><br/>
+                                        <b>UNACCOMPANIED MINORS</b>: Special programming for children aged 3 to 11 in Hanger One. Includes adult supervision and a kid-friendly dinner.<br/><br/>
+                                        <b>INFANT-IN-ARMS</b>: Children under 3 years old who will hang out with the adults in Hanger Two.
                                     </Typography>
                                 </>
                             }
