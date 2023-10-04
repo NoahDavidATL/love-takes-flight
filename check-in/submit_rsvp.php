@@ -18,6 +18,9 @@ if ($action && $guests) {
         }
 
         $name = $guest['name'];
+        if ($action === 'decline') {
+            $name = $name . ' (DECLINED)';
+        }
         $ticketType = $guest['ticketType'];
         $specialMeals = isset($guest['specialMeals']) ? $guest['specialMeals'] : null;
         $interestInFlightSimulator = isset($guest['interestInFlightSimulator']) ? $guest['interestInFlightSimulator'] : null;
