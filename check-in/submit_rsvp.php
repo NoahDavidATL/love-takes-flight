@@ -41,7 +41,7 @@ if ($action && $guests) {
         $message = "$name has checked-in (Ticket: $ticketType, Meal: $specialMeals, Flight Sim: $interestInFlightSimulator).";
         if ($action === 'decline') {
             $subject = '[LoveTakesFlight] RSVP Declined';
-            $message = "$name has declined (Ticket: $ticketType, Meal: $specialMeals, Flight Sim: $interestInFlightSimulator).";
+            $message = "$name can't make it (Ticket: $ticketType, Meal: $specialMeals, Flight Sim: $interestInFlightSimulator).";
         }
         $headers = 'From: support@lovetakesflight2023.com' . "\r\n" .
             'Reply-To: support@lovetakesflight2023.com' . "\r\n" .
