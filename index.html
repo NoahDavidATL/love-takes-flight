@@ -1505,6 +1505,12 @@
         modal.style.display = 'none';  // This line closes the modal
         localStorage.setItem('modalInteracted', 'true');
     }
+    function getQueryParam(name) {
+        var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+        var results = regex.exec(window.location.search);
+        return results ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : null;
+    }
+
     $(document).ready(function () {
         $(".answer").hide();
         $(".question li").click(function () {
@@ -1514,8 +1520,9 @@
         });
 
         /* RSVP Check-In Modal */
-        var today = new Date();
-        var start = new Date('October 09, 2023');
+        var demo = getQueryParam('demo');
+        var startDateString = demo === 'true' ? 'October 05, 2023' : 'October 09, 2023';
+        var start = new Date(startDateString);
         var end = new Date('November 20, 2023');
         var modalInteracted = localStorage.getItem('modalInteracted');
 
