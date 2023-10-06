@@ -1521,7 +1521,7 @@
 
         /* RSVP Check-In Modal */
         var demo = getQueryParam('demo');
-        var startDateString = demo === 'true' ? 'October 05, 2023' : 'October 09, 2023';
+        var today = demo === 'true' ? 'October 05, 2023' : 'October 09, 2023';
         var start = new Date(startDateString);
         var end = new Date('November 20, 2023');
         var modalInteracted = localStorage.getItem('modalInteracted');
@@ -1535,7 +1535,7 @@
         if (!modalInteracted && today >= start && today <= end) {
             var modal = document.getElementById('myModal');
             var span = document.getElementsByClassName('close')[0];
-            modal.style.dispflay = 'block';
+            modal.style.display = 'block';
 
             span.onclick = function () {
                 setModalInteracted();
