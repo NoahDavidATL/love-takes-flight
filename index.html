@@ -1521,8 +1521,9 @@
 
         /* RSVP Check-In Modal */
         var demo = getQueryParam('demo');
-        var today = demo === 'true' ? 'October 05, 2023' : 'October 09, 2023';
-        var start = new Date(startDateString);
+        var today = new Date();
+        var startDate = demo === 'true' ? 'October 05, 2023' : 'October 09, 2023';
+        var start = new Date(startDate);
         var end = new Date('November 20, 2023');
         var modalInteracted = localStorage.getItem('modalInteracted');
 
