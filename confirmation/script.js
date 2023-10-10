@@ -30,28 +30,38 @@ const styles = {
 
 const accordionData = [
     {
-        question: "Where do I Park?",
-        answer: "Navigate to <a href='https://maps.app.goo.gl/QZnk9FUSVTaqnox68?g_st=ic' target='_blank'>1060 Delta Blvd, Hapeville, GA 30354</a>. Follow the signs to the Delta Flight Museum entrance.",
+        question: "Where do I park?",
+        answer: "Navigate to <a href='https://maps.app.goo.gl/QZnk9FUSVTaqnox68?g_st=ic' target='_blank'>1060 Delta Blvd, Hapeville, GA 30354</a> (Note: Using Google Maps directions when searching for 'Delta Flight Museum' will not take you to the proper entrance. Click that link instead). Follow the signs to the Delta Flight Museum entrance, show your ID at the security gate, let them know you're there for the wedding, and enjoy plenty of free parking next to the hangers!",
         iconClass: "fa-duotone fa-circle-parking fa-xl"
     },
     {
-        question: "What is the Weather like in Atlanta?",
+        question: "What hotel should I book?",
+        answer: "We recommend staying at the <a href='https://www.marriott.com/events/start.mi?id=1685740289697&key=GRP' target='_blank'>Renaissance Concourse Atlanta Airport</a>. The discounted rates are only guaranteed through November 15, so make sure to book your stay early. There are two other options available (Hyatt and IHG) on the <a href='https://www.LoveTakesFlight2023.com#hotels'  target='_blank'>main website</a>.",
+        iconClass: "fa-duotone fa-bell-concierge fa-xl"
+    },
+    {
+        question: "What should I pack?",
+        answer: "Your dance shows, a big smile, and a fun cocktail attire outfit. If you are bringing an Unaccompanied Minor (or two), pack them some travel-themed pajamas to change into to watch Pixar's 'Planes' in the movie theater.",
+        iconClass: "fa-duotone fa-popcorn fa-xl"
+    },
+    {
+        question: "What is the weather like in Atlanta?",
         answer: "It might be a little chilly in December, so bring a coat just in case.",
         iconClass: "fas fa-cloud-sun fa-xl"
     },
     {
-        question: "What Hotel should I Book?",
-        answer: "We recommend staying at the <a href='https://www.marriott.com/events/start.mi?id=1685740289697&key=GRP' target='_blank'>Renaissance Concourse Atlanta Airport</a>.",
-        iconClass: "fa-duotone fa-bell-concierge fa-xl"
+        question: "How do I get back to the main website?",
+        answer: "<a href='https://www.LoveTakesFlight2023.com' target='_blank'>Click Here</a>!",
+        iconClass: "fa-duotone fa-backward fa-xl"
     },
     {
-        question: "Is there Saturday Morning Yoga?",
-        answer: "Why yes, yes there is. Stop by the Lambert Room in the Renaissance next to the restaurant at 8:30 am to join.",
-        iconClass: "fa-duotone fa-dumbbell fa-xl"
+        question: "How do I ask more questions?",
+        answer: "Reach out to our wedding planner, <a href='mailto:danielle@bashandbumble.com?subject=KRONEMEYER WEDDING QUESTION' target='_blank'>Danielle Taylor</a>. She'll be glad to assist!!",
+        iconClass: "fa-regular fa-block-question fa-xl"
     },
     {
-        question: "Should I Print this Confirmation?",
-        answer: "Sure! You can also bookmark this page if you want to reference it later.",
+        question: "Should I print this confirmation?",
+        answer: "Sure! You can also bookmark this page if you want to reference it later, since it is the same for everyone who RSVP/Checks-In!",
         iconClass: "fa-duotone fa-print fa-xl"
     }
 ];
