@@ -41,7 +41,7 @@ const accordionData = [
     },
     {
         question: "What should I pack?",
-        answer: "Your dance shows, a big smile, and a fun cocktail attire outfit. If you are bringing an Unaccompanied Minor (or two), pack them some travel-themed pajamas to change into to watch Pixar's 'Planes' in the movie theater.",
+        answer: "Your dance shoes, a big smile, and a fun cocktail attire outfit. If you are bringing an Unaccompanied Minor (or two), pack them some travel-themed pajamas to change into to watch Pixar's 'Planes' in the movie theater.",
         iconClass: "fa-duotone fa-popcorn fa-xl"
     },
     {
