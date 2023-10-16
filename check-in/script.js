@@ -112,11 +112,11 @@ function GuestForm({index, handleGuestChange}) {
                         label="Special Meals"
                         onChange={e => handleGuestChange(index, 'specialMeals', e.target.value)}
                     >
+                        <MenuItem value="None">No Special Meal</MenuItem>
                         <MenuItem value="Vegan">Vegan</MenuItem>
                         <MenuItem value="Kosher">Kosher</MenuItem>
                         <MenuItem value="Halal">Halal</MenuItem>
                         <MenuItem value="Other">Other</MenuItem>
-                        <MenuItem value="None">No Special Meal</MenuItem>
                     </Select>
                 </FormControl>
                 <ClickAwayListener onClickAway={() => handleTooltipClose('tooltip2')}>
@@ -135,7 +135,7 @@ function GuestForm({index, handleGuestChange}) {
                                     <Typography color="inherit">
                                         The Delta One buffet will include many food options, including
                                         a variety of <b>vegetarian</b> and <b>gluten-free</b> dishes.<br/><br/>
-                                        If you request a special meal, our wedding planner
+                                        If you request "Other", our wedding planner
                                         will reach out to you a few weeks before the event to confirm your dietary
                                         restrictions.
                                     </Typography>
@@ -300,7 +300,7 @@ function App() {
                 Complete Check In
             </Button>
             <Button variant="contained" color="error" onClick={() => handleRSVP('decline')}>
-                Send Regards
+                Send Regrets
             </Button>
             </div>
 
