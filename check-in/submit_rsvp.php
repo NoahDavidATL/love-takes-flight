@@ -9,6 +9,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 $action = $data['action'];
 $guests = $data['guests'];
+$ip_address = $_SERVER['REMOTE_ADDR'];
 
 if ($action && $guests) {
     foreach ($guests as $guest) {
@@ -25,8 +26,8 @@ if ($action && $guests) {
         $specialMeals = isset($guest['specialMeals']) ? $guest['specialMeals'] : null;
         $interestInFlightSimulator = isset($guest['interestInFlightSimulator']) ? $guest['interestInFlightSimulator'] : null;
 
-        $query = "INSERT INTO phpbb_rsvp (name, class, food, flight, timestamp) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
-        $params = [$name, $ticketType, $specialMeals, $interestInFlightSimulator];
+        $query = "INSERT INTO phpbb_rsvp (name, class, food, flight, ip, timestamp) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        $params = [$name, $ticketType, $specialMeals, $interestInFlightSimulator, $ip_address];
 
         if ($specialMeals == null) {
             $specialMeals = "Buffet";
