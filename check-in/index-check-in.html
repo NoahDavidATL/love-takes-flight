@@ -19,66 +19,111 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check-In Is Closed</title>
+    <title>It's Time To Check In</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <script src="https://kit.fontawesome.com/ea0834dd2a.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@mui/material@5.11.0/umd/material-ui.production.min.js"></script>
     <style>
         #root {
-            background-color: rgba(240, 240, 240, 0.25);
-            height: 100vh;
-            width: 100vw;
-        }
-        body {
+            position: relative;
+            background-color: rgba(240, 240, 240, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: calc(100vh - 100px);
+            width: 100%;
             font-family: 'Roboto', sans-serif;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        body {
             margin: 0;
-            background-image: url('../assets/sorry.webp');
+            background-image: url('https://pbs.twimg.com/media/DhUsMR6X4AAW0Rp?format=jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
+
         .header-container {
             width: 100%;
             max-width: 800px;
             margin: 0 auto 16px;
-            padding-top: 20px;
         }
+
         .header-text {
             font-size: 48px;
-            color: #FFF;
+            color: #fff;
             width: 100%;
             padding: 20px 0 0 0;
             margin-top: -50px;
             text-align: center;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* X-offset, Y-offset, Blur, Color */
         }
+
         .subheader-text {
             font-size: 20.5px;
-            color: #FFF;
+            color: #fff;
             width: 100%;
             text-align: center;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* X-offset, Y-offset, Blur, Color */
             padding: 0 0 10px 0;
+        }
+
+        .guest-box {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            width: 100%;
+            max-width: 374px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+        }
+
+        .guest-box .ticket-type {
+            margin-top: 0 !important;
         }
 
         @media (max-width: 600px) {
             .header-text {
                 font-size: 40px;
             }
+
             .subheader-text {
                 font-size: 17px;
+            }
+
+            .guest-box {
+                max-width: calc(100vw - 85px);
+                width: calc(100vw - 85px);
+            }
+
+            .guest-box .MuiTextField-root {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .guest-box .MuiFormControl-root {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 8px;
+            }
+
+            .guest-box .ticket-type {
+                margin-left: 0 !important;
+                margin-top: 20px !important;
             }
         }
     </style>
 </head>
 <body>
-    <div id="root" style="flex: 1;"></div>
+<div id="root" style="flex: 1;"></div>
 
-    <script type="text/babel" src="script.js"></script>
-
+<script type="text/babel" src="script.js"></script>
 </body>
 </html>
